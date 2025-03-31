@@ -19,7 +19,7 @@ class CrudUserController extends Controller
      */
     public function login()
     {
-        return view('crud_user.login');
+        return view('crud_user.loginnew');
     }
 
     /**
@@ -28,11 +28,11 @@ class CrudUserController extends Controller
     public function authUser(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'name' => 'required',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('name', 'password');
 
         if (Auth::attempt($credentials)) {
             return redirect()->intended('list')
@@ -47,7 +47,7 @@ class CrudUserController extends Controller
      */
     public function createUser()
     {
-        return view('crud_user.create');
+        return view('crud_user.register');
     }
 
     /**
@@ -65,8 +65,6 @@ class CrudUserController extends Controller
         $check = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
-            'address' => $data['address'],
             'password' => Hash::make($data['password'])
         ]);
 
@@ -76,17 +74,19 @@ class CrudUserController extends Controller
     /**
      * View user detail page
      */
-    public function readUser(Request $request) {
+    public function readUser(Request $request)
+    {
         $user_id = $request->get('id');
         $user = User::find($user_id);
 
-        return view('crud_user.read', ['messi' => $user]);
+        return view('crud_user.view', ['messi' => $user]);
     }
 
     /**
      * Delete user by id
      */
-    public function deleteUser(Request $request) {
+    public function deleteUser(Request $request)
+    {
         $user_id = $request->get('id');
         $user = User::destroy($user_id);
 
@@ -101,7 +101,7 @@ class CrudUserController extends Controller
         $user_id = $request->get('id');
         $user = User::find($user_id);
 
-        return view('crud_user.update', ['user' => $user]);
+        return view('crud_user.updatenew', ['user' => $user]);
     }
 
     /**
@@ -111,31 +111,39 @@ class CrudUserController extends Controller
     {
         $input = $request->all();
 
+        if (!isset($input['id'])) {
+            return redirect()->back()->withErrors(['error' => 'Thiếu ID người dùng!']);
+        }
+
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,id,'.$input['id'],
+            'email' => 'required|email|unique:users,email,' . $input['id'],
             'password' => 'required|min:6',
         ]);
 
-       $user = User::find($input['id']);
-       $user->name = $input['name'];
-       $user->email = $input['email'];
-       $user->phone = $input['phone'];
-       $user->address = $input['address'];
-       $user->password = $input['password'];
-       $user->save();
+        $user = User::find($input['id']);
 
-        return redirect("list")->withSuccess('You have signed-in');
+        if (!$user) {
+            return redirect()->back()->withErrors(['error' => 'Không tìm thấy người dùng!']);
+        }
+
+        $user->name = $input['name'];
+        $user->email = $input['email'];
+        $user->password = Hash::make($input['password']);
+        $user->save();
+
+        return redirect("list")->withSuccess('Cập nhật thành công!');
     }
+
 
     /**
      * List of users
      */
     public function listUser()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             $users = User::all();
-            return view('crud_user.list', ['users' => $users]);
+            return view('crud_user.listnew', ['users' => $users]);
         }
 
         return redirect("login")->withSuccess('You are not allowed to access');
@@ -144,7 +152,8 @@ class CrudUserController extends Controller
     /**
      * Sign out
      */
-    public function signOut() {
+    public function signOut()
+    {
         Session::flush();
         Auth::logout();
 
