@@ -17,7 +17,7 @@
             <div class="col">
             @guest
                 <a href="{{route('login')}}" class="text-decoration-none">Home</a> /
-                <a href="{{route('login')}}" class="text-decoration-none">Đăng nhập</a>
+                <a href="{{route('login')}}" class="text-decoration-none">Đăng nhập</a>/
                 <a href="{{ route('user.createUser') }}" class="text-decoration-none">Đăng ký</a>
                 @endguest
             </div>

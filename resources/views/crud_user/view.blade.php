@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,21 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
-        <!-- Navigation -->
         <div class="row border p-2 text-center mb-4">
             <div class="col">
-            @guest
-                <a href="{{ route('login') }}" class="text-decoration-none">Home</a> / 
+                @guest
+                <a href="{{route('login')}}" class="text-decoration-none">Home</a> /
+                @else
+                <a href="{{route('login')}}" class="text-decoration-none">Home</a> /
+                <a href="{{ route('user.list') }}" class="text-decoration-none">Users</a> /
                 <a href="{{ route('signout') }}" class="text-decoration-none">Đăng xuất</a>
                 @endguest
             </div>
         </div>
-        
+
         <!-- User Details -->
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
@@ -44,7 +48,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Footer -->
         <div class="row border p-2 text-center mt-4">
             <div class="col">
@@ -56,4 +60,5 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
