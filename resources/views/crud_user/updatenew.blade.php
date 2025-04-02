@@ -69,6 +69,24 @@
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif
                                 </div>
+                                <label for="phone" class="form-label">phone</label>
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="phone" id="phone" class="form-control"
+                                        value="{{ $user->phone }}"
+                                        name="phone" required autofocus>
+                                    @if ($errors->has('phone'))
+                                    <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                    @endif
+                                </div>
+                                <label for="address" class="form-label">address</label>
+                                <div class="form-group mb-3">
+                                    <input type="text" placeholder="address" id="address" class="form-control"
+                                        value="{{ $user->address }}"
+                                        name="address" required autofocus>
+                                    @if ($errors->has('address'))
+                                    <span class="text-danger">{{ $errors->first('address') }}</span>
+                                    @endif
+                                </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <a href="#" class="text-decoration-none">Đã có tài khoản</a>
                                     <button type="submit" class="btn btn-dark btn-block">Update</button>

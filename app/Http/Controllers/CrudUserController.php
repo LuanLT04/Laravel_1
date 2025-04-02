@@ -65,6 +65,8 @@ class CrudUserController extends Controller
         $check = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
+            'address' => $data['address'],
             'password' => Hash::make($data['password'])
         ]);
 
@@ -111,28 +113,21 @@ class CrudUserController extends Controller
     {
         $input = $request->all();
 
-        if (!isset($input['id'])) {
-            return redirect()->back()->withErrors(['error' => 'Thiếu ID người dùng!']);
-        }
-
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $input['id'],
+            'email' => 'required|email|unique:users,id,'.$input['id'],
             'password' => 'required|min:6',
         ]);
 
-        $user = User::find($input['id']);
+       $user = User::find($input['id']);
+       $user->name = $input['name'];
+       $user->email = $input['email'];
+       $user->phone = $input['phone'];
+       $user->address = $input['address'];
+       $user->password = $input['password'];
+       $user->save();
 
-        if (!$user) {
-            return redirect()->back()->withErrors(['error' => 'Không tìm thấy người dùng!']);
-        }
-
-        $user->name = $input['name'];
-        $user->email = $input['email'];
-        $user->password = Hash::make($input['password']);
-        $user->save();
-
-        return redirect("list")->withSuccess('Cập nhật thành công!');
+        return redirect("list")->withSuccess('You have signed-in');
     }
 
 

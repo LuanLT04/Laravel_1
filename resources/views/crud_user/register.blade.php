@@ -45,6 +45,20 @@
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">phone</label>
+                                <input type="phone" class="form-control" id="phone" name="phone" required>
+                                @if ($errors->first('phone'))
+                                    <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                @endif
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">address</label>
+                                <input type="address" class="form-control" id="address" name="address" required>
+                                @if ($errors->first('address'))
+                                    <span class="text-danger">{{ $errors->first('address') }}</span>
+                                @endif
+                            </div>
                             
                             <div class="mb-3">
                                 <label for="password" class="form-label">Mật khẩu</label>
