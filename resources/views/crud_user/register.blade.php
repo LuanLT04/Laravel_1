@@ -46,10 +46,10 @@
                                 @endif
                             </div>
                             <div class="mb-3">
-                                <label for="phone" class="form-label">phone</label>
-                                <input type="phone" class="form-control" id="phone" name="phone" required>
-                                @if ($errors->first('phone'))
-                                    <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                <label for="massv" class="form-label">massv</label>
+                                <input type="massv" class="form-control" id="massv" name="massv" required>
+                                @if ($errors->first('massv'))
+                                    <span class="text-danger">{{ $errors->first('massv') }}</span>
                                 @endif
                             </div>
                             <div class="mb-3">

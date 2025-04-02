@@ -69,13 +69,13 @@
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif
                                 </div>
-                                <label for="phone" class="form-label">phone</label>
+                                <label for="massv" class="form-label">massv</label>
                                 <div class="form-group mb-3">
-                                    <input type="text" placeholder="phone" id="phone" class="form-control"
-                                        value="{{ $user->phone }}"
-                                        name="phone" required autofocus>
-                                    @if ($errors->has('phone'))
-                                    <span class="text-danger">{{ $errors->first('phone') }}</span>
+                                    <input type="text" placeholder="massv" id="massv" class="form-control"
+                                        value="{{ $user->massv }}"
+                                        name="massv" required autofocus>
+                                    @if ($errors->has('massv'))
+                                    <span class="text-danger">{{ $errors->first('massv') }}</span>
                                     @endif
                                 </div>
                                 <label for="address" class="form-label">address</label>
