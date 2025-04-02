@@ -113,6 +113,10 @@ class CrudUserController extends Controller
     {
         $input = $request->all();
 
+        if (!isset($input['id'])) {
+            return redirect()->back()->withErrors(['error' => 'Thiếu ID người dùng!']);
+        }
+
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,id,'.$input['id'],
