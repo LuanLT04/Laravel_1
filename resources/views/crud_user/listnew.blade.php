@@ -17,7 +17,10 @@
             <div class="col">
                 @guest
                 <a href="{{route('login')}}" class="text-decoration-none">Home</a> /
-                <a href="{{ route('signout') }}" class="text-decoration-none">Đăng xuất</a>
+                <a href="{{ route('register') }}" class="text-decoration-none">Register</a>
+                @else
+                <a href="{{route('login')}}" class="text-decoration-none">Home</a> /
+                <a href="{{ route('signout') }}" class="text-decoration-none">Logout</a>
                 @endguest
             </div>
         </div>
